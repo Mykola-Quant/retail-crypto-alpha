@@ -401,8 +401,8 @@ output of this project.
 
 ## Appendix: Tools and Code
 
-The project was built as a set of reusable, independently runnable Python tools. *(Repository link
-to be added.)*
+The project was built as a set of reusable, independently runnable Python tools. *Repository:
+https://github.com/Mykola-Quant/retail-crypto-alpha*
 
 **Data layer**
 - Self-healing WebSocket collectors for trades, liquidations, and open interest / funding, with

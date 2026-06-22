@@ -70,6 +70,7 @@ The backtesting framework is built on one rule: a backtest must be allowed to re
 **Risk-management utilities**
 - `daily_risk_signal.py` — daily target-position generator (volatility targeting + trend filter),
   with history export and charting.
+- `risk_bot.py` — Telegram bot exposing the daily signal and the price/position chart on demand.
 
 **Earlier exploratory components**
 - `strategy.py`, `position_manager.py`, `liquidity_levels.py`, `daily_report.py` — parts of an
