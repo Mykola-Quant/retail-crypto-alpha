@@ -44,26 +44,36 @@ The backtesting framework is built on one rule: a backtest must be allowed to re
 
 ## Repository structure
 
-**Data layer**
-- `collectors/` — self-healing WebSocket collectors (trades, liquidations, open interest / funding)
-  with exponential-backoff reconnect, client recreation, and trade-ID deduplication.
-- `ingest/` — aggregated-trade ingestion with automatic timestamp-unit detection and memory-light
-  per-file bar aggregation (handles 180M+ rows on a laptop).
+**Data infrastructure**
+- `main.py` — live collector / bot engine: self-healing WebSocket streams (trades, liquidations,
+  open interest / funding) with exponential-backoff reconnect and client recreation.
+- `database.py` — asynchronous SQLite storage layer.
+- `convert_spot.py`, `convert_perp.py`, `convert_csv_to_parquet.py`, `merge_spot.py`,
+  `merge_perp.py` — aggregated-trade ingestion: timestamp-unit auto-detection, deduplication, and
+  memory-light bar aggregation (handles 180M+ rows on a laptop).
+- `fetch_daily.py`, `fetch_funding.py` — daily-bar and funding-history fetchers.
 
 **Backtesting harnesses**
 - `honest_backtest.py` — order-flow momentum and absorption.
 - `cascade_study.py` — liquidation cascades conditioned on open interest.
-- `cvd_divergence.py` — spot–perpetual CVD divergence.
+- `cvd_divergence_v2.py` — spot–perpetual CVD divergence.
 - `funding_zscore_backtest.py` — funding-rate z-score mean reversion.
 - `absorption_backtest.py` — absorption context filter with a drift-aware permutation test.
 - `opening_fvg_backtest.py`, `multi_fvg_backtest.py` — opening-range FVG and calendar effects,
-  cross-asset, with descriptive / baseline / tradable layers.
-- `regime_overlay.py` — volatility targeting and trend filters with parameter-plateau checks.
+  cross-asset (BTC, ETH, SOL, gold, oil).
+- `strategy_suite_backtest.py`, `weekday_effect_analysis.py`, `monday_range_sweep_backtest.py` —
+  intraday-momentum, calendar, and Monday-range tests (the small-sample / out-of-sample discipline
+  in action).
+- `cme_gaps.py`, `session_bias_tester.py`, `hypothesis_tester.py` — additional OHLCV-pattern tests.
+- `regime_overlay_v2.py` — volatility targeting and trend filters with parameter-plateau checks.
 
 **Risk-management utilities**
-- `daily_risk_signal.py` — daily target-position generator (vol targeting + trend filter), with
-  history export and charting.
-- `risk_bot.py` — Telegram bot exposing the daily signal and the price/position chart on demand.
+- `daily_risk_signal.py` — daily target-position generator (volatility targeting + trend filter),
+  with history export and charting.
+
+**Earlier exploratory components**
+- `strategy.py`, `position_manager.py`, `liquidity_levels.py`, `daily_report.py` — parts of an
+  earlier discretionary/SMC trading bot, retained for context on how the research began.
 
 ## Getting started
 
