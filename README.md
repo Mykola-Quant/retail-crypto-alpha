@@ -90,4 +90,4 @@ honest interpretation.
 
 ---
 
-*Author: [your name] · [LinkedIn / email] · Built with Python on commodity hardware.*
+*Author: Mykola · github.com/Mykola-Quant · Built with Python on commodity hardware.*
