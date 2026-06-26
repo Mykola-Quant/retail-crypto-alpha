@@ -3,6 +3,8 @@
 **A systematic test of whether retail-accessible microstructure signals can beat costs on liquid
 crypto — and an honest account of what does and does not survive.**
 
+> **Part of a larger falsification arc.** The FX & metals half of this work — the Turtle Soup + SMT (CRT) liquidity-sweep setup tested across EURUSD, gold, silver and a synthetic DXY — lives in [turtle-soup-smt-falsification](https://github.com/Mykola-Quant/turtle-soup-smt-falsification). Same discipline: default = no edge, costs charged, out-of-sample confirmation required.
+
 This repository contains the full research pipeline behind the study: live data collectors, a
 tick-data ingestion layer, a reusable backtesting framework, and a suite of risk-management tools.
 Every hypothesis was pre-specified, tested out-of-sample, charged realistic transaction costs, and
